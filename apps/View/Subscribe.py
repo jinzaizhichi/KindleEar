@@ -8,8 +8,6 @@
 import datetime
 from operator import attrgetter
 import web
-import urlparse
-
 try:
     import json
 except ImportError:
@@ -22,7 +20,6 @@ from apps.dbModels import *
 from books import BookClasses, BookClass
 from books.base import BaseComicBook
 from books.comic import ComicBaseClasses
-from config import *
 
 class MySubscription(BaseHandler):
     __url__ = "/my"
@@ -44,7 +41,6 @@ class MySubscription(BaseHandler):
             myfeeds=myfeeds,
             comic_base_classes=ComicBaseClasses,
             tips=tips,
-            subscribe_url=urlparse.urljoin(DOMAIN, self.__url__)
         )
 
     def POST(self):  # 添加自定义RSS
