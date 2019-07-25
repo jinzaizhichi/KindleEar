@@ -1,0 +1,9 @@
+curl https://api.telegra.ph/createAccount?short_name=WenZhai&author_name=WenZhai&author_url=https://github.com/jinzaizhichi/flowerss-bot
+
+
+
+WenZhaiBot token: 933397669:AAE9Lcm_pW3V2yXmNI2J0PPW631lfoIDTJw
+
+Telegraph Token:  1a88a7790a2e3070573ad39e5ead781ceb5701a95dcd2fc2d1bf2498b15d
+
+docker run --restart=always --name flowerss -d -v /flowerssdata:/var/flowerss indes/flowerss-bot -b 933397669:AAE9Lcm_pW3V2yXmNI2J0PPW631lfoIDTJw -t 1a88a7790a2e3070573ad39e5ead781ceb5701a95dcd2fc2d1bf2498b15d
