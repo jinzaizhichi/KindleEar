@@ -87,6 +87,7 @@ class KeUser(db.Model): # kindleEar User
     browser = db.BooleanProperty()
     qrcode = db.BooleanProperty() #是否在文章末尾添加文章网址的QRCODE
     cover = db.BlobProperty() #保存各用户的自定义封面图片二进制内容
+    css_content = db.TextProperty() #added 2019-09-12 保存用户上传的css样式表
     
     book_mode = db.StringProperty() #added 2017-08-31 书籍模式，'periodical'|'comic'，漫画模式可以直接全屏
     expiration_days = db.IntegerProperty() #added 2018-01-07 账号超期设置值，0为永久有效
@@ -154,4 +155,25 @@ class SubscriptionInfo(db.Model):
     @password.setter
     def password(self, pwd):
         self.encrypted_pwd = ke_encrypt(pwd, self.user.secret_key)
-        
+
+#Shared RSS links from other users [for kindleear.appspot.com only]
+class SharedRss(db.Model):
+    title = db.StringProperty()
+    url = db.StringProperty()
+    isfulltext = db.BooleanProperty()
+    category = db.StringProperty()
+    creator = db.StringProperty()
+    created_time = db.DateTimeProperty()
+    subscribed = db.IntegerProperty(default=0) #for sort
+    invalid_report_days = db.IntegerProperty(default=0) #some one reported it is a invalid link
+    last_invalid_report_time = db.DateTimeProperty() #a rss will be deleted after some days of reported_invalid
+    
+    #return all categories in database
+    @classmethod
+    def categories(self):
+        return [item.category for item in db.GqlQuery('SELECT DISTINCT category FROM SharedRss')]
+    
+#Buffer for category of shared rss [for kindleear.appspot.com only]
+class SharedRssCategory(db.Model):
+    name = db.StringProperty()
+    last_updated = db.DateTimeProperty() #for sort
