@@ -1,5 +1,11 @@
 # Changelog for KindleEar
 
+## 1.26.6
+  1. Add comic pufei, gufeng.
+  2. Add more languages for books.
+
+## 1.26.5
+  1. bugfix: fix BUG from 1.26.3, incorrect layout and jump to incorrect position from table of Contents.
 
 ## 1.26.4
   1. bugfix: failed to push comic book, bug from 1.26.2.
